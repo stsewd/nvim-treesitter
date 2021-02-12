@@ -179,7 +179,7 @@ We are looking for maintainers to add more parsers and to write query files for 
 - [x] [typescript](https://github.com/tree-sitter/tree-sitter-typescript) (maintained by @steelsojka)
 - [x] [verilog](https://github.com/tree-sitter/tree-sitter-verilog) (maintained by @zegervdv)
 - [ ] [vue](https://github.com/ikatyang/tree-sitter-vue)
-- [ ] [yaml](https://github.com/ikatyang/tree-sitter-yaml)
+- [x] [yaml](https://github.com/ikatyang/tree-sitter-yaml) (maintained by @stsewd)
 <!--parserinfo-->
 
 
