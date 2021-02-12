@@ -1,1 +1,5 @@
-(document) @scope
+[
+ (stream)
+ (document)
+ (block_node)
+] @scope
