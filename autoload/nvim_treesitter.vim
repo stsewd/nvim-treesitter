@@ -3,7 +3,17 @@ function! nvim_treesitter#statusline(...) abort
 endfunction
 
 function! nvim_treesitter#foldexpr() abort
-	return luaeval(printf('require"nvim-treesitter.fold".get_fold_indic(%d)', v:lnum))
+    let l:lastbuftick = get(b:, 'nvim_treesitter_lastbuftick', -1)
+    let l:buftick = nvim_buf_get_changedtick(0)
+    if l:lastbuftick != l:buftick
+      let b:nvim_treesitter_lastbuftick = l:buftick
+	  let b:nvim_treesitter_folds = luaeval("require('nvim-treesitter.fold').get_folds()")
+    endif
+    let l:folds = get(b:, 'nvim_treesitter_folds', [])
+    if len(folds) >= v:lnum
+      return l:folds[v:lnum - 1]
+    endif
+    return 0
 endfunction
 
 function! nvim_treesitter#installable_parsers(arglead, cmdline, cursorpos) abort

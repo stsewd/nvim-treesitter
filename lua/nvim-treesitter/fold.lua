@@ -80,4 +80,13 @@ function M.get_fold_indic(lnum)
   return levels[lnum] or "0"
 end
 
+function M.get_folds()
+  if not parsers.has_parser() then
+    return {}
+  end
+
+  local buf = api.nvim_get_current_buf()
+  return folds_levels(buf) or {}
+end
+
 return M
