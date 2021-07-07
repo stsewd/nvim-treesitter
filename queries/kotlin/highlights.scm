@@ -102,6 +102,8 @@
 
 ;; Keywords
 [
+ "this"
+ "override"
  "enum"
  "as"
  "class"
@@ -113,12 +115,15 @@
  "var"
  "break"
  "by"
- "fun"
  "companion"
- "return"
  "constructor"
  "throw"
 ] @keyword
+
+"fun" @keyword.function
+"return" @keyword.return
+
+(null_literal) @keyword
 
 ; const etc.
 (property_modifier) @keyword

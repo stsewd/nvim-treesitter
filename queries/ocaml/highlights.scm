@@ -8,7 +8,10 @@
 
 (
   (type_constructor) @type.builtin
-  (#match? @type.builtin "^(int|char|bytes|string|float|bool|unit|exn|array|list|option|int32|int64|nativeint|format6|lazy_t)$")
+  (#any-of? @type.builtin
+    "int" "char" "bytes" "string" "float"
+    "bool" "unit" "exn" "array" "list" "option"
+    "int32" "int64" "nativeint" "format6" "lazy_t")
 )
 
 [(class_name) (class_type_name) (type_constructor)] @type
@@ -68,7 +71,7 @@
 ; Constants
 ;----------
 
-(boolean) @constant
+[(boolean) (unit)] @constant
 
 [(number) (signed_number)] @number
 
@@ -80,42 +83,23 @@
 
 (escape_sequence) @string.escape
 
-(conversion_specification) @punctuation.special
-
-; Operators
-;----------
-
-(match_expression (match_operator) @keyword)
-
-(value_definition [(let_operator) (and_operator)] @keyword)
-
 [
-  (prefix_operator)
-  (infix_operator)
-  (indexing_operator)
-  (let_operator)
-  (and_operator)
-  (match_operator)
-] @operator
-
-(prefix_operator "!" @operator)
-
-(infix_operator ["&" "+" "-" "=" ">" "|" "%"] @operator)
-
-(signed_number ["+" "-"] @operator)
-
-["*" "#" "::" "<-"] @operator
+  (conversion_specification)
+  (pretty_printing_indication)
+] @punctuation.special
 
 ; Keywords
 ;---------
 
 [
   "and" "as" "assert" "begin" "class" "constraint"
-  "end" "external" "fun" "function" "functor" "in"
+  "end" "external" "in"
   "inherit" "initializer" "lazy" "let" "match" "method" "module"
   "mutable" "new" "nonrec" "object" "of" "private" "rec" "sig" "struct"
   "type" "val" "virtual" "when" "with"
 ] @keyword
+
+["fun" "function" "functor"] @keyword.function
 
 ["if" "then" "else"] @conditional
 
@@ -146,6 +130,33 @@
   "," "." ";" ":" "=" "|" "~" "?" "+" "-" "!" ">" "&"
   "->" ";;" ":>" "+=" ":=" ".."
 ] @punctuation.delimiter
+
+; Operators
+;----------
+
+[
+  (prefix_operator)
+  (sign_operator)
+  (infix_operator)
+  (hash_operator)
+  (indexing_operator)
+  (let_operator)
+  (and_operator)
+  (match_operator)
+] @operator
+
+(match_expression (match_operator) @keyword)
+
+(value_definition [(let_operator) (and_operator)] @keyword)
+
+;; TODO: this is an error now
+;(prefix_operator "!" @operator)
+
+(infix_operator ["&" "+" "-" "=" ">" "|" "%"] @operator)
+
+(signed_number ["+" "-"] @operator)
+
+["*" "#" "::" "<-"] @operator
 
 ; Attributes
 ;-----------

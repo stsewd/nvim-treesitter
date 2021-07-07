@@ -13,6 +13,7 @@
   (while_statement)
   (table)
   (arguments)
+  (do_statement)
 ] @indent
 
 [
@@ -26,3 +27,5 @@
   (else)
   (elseif)
 ] @branch
+
+(comment) @ignore

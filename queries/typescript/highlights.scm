@@ -1,4 +1,4 @@
-; inherits: javascript
+; inherits: ecma
 [
 "abstract"
 "declare"
@@ -12,14 +12,19 @@
 "protected"
 "public"
 "type"
+"readonly"
 ] @keyword
-
-(readonly) @keyword
 
 ; types
 
 (type_identifier) @type
 (predefined_type) @type.builtin
+
+(import_statement "type"
+  (import_clause
+    (named_imports
+      ((import_specifier
+          name: (identifier) @type)))))
 
 ; punctuation
 
@@ -46,5 +51,30 @@
 
 (undefined) @variable.builtin
 
+;;; Parameters
 (required_parameter (identifier) @parameter)
 (optional_parameter (identifier) @parameter)
+
+(required_parameter
+  (rest_pattern
+    (identifier) @parameter))
+
+;; ({ a }) => null
+(required_parameter
+  (object_pattern
+    (shorthand_property_identifier_pattern) @parameter))
+
+;; ({ a: b }) => null
+(required_parameter
+  (object_pattern
+    (pair_pattern
+      value: (identifier) @parameter)))
+
+;; ([ a ]) => null
+(required_parameter
+  (array_pattern
+    (identifier) @parameter))
+
+;; a => null
+(arrow_function
+  parameter: (identifier) @parameter)

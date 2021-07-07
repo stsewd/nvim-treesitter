@@ -15,12 +15,13 @@ Depending on which part of the plugin you want to contribute to, please read the
 ## Style Checks and Tests
 
 We haven't implemented any functional tests yet. Feel free to contribute.
-However, we check code style with `luacheck`!
+However, we check code style with `luacheck` and `stylua`!
 Please install luacheck and activate our `pre-push` hook to automatically check style before
 every push:
 
 ```bash
 luarocks install luacheck
+cargo install stylua
 ln -s ../../scripts/pre-push .git/hooks/pre-push
 ```
 
@@ -136,6 +137,7 @@ effect on highlighting. We will work on improving highlighting in the near futur
 @keyword
 @keyword.function
 @keyword.operator (for operators that are English words, e.g. `and`, `or`)
+@keyword.return
 @operator (for symbolic operators, e.g. `+`, `*`)
 @exception
 @include keywords for including modules (e.g. import/from in Python)
@@ -143,6 +145,7 @@ effect on highlighting. We will work on improving highlighting in the near futur
 @type
 @type.builtin
 @namespace for identifiers referring to namespaces
+@symbol for identifiers referring to symbols
 @attribute for e.g. Python decorators
 ```
 
@@ -166,6 +169,14 @@ Mainly for markup languages.
 @text.title
 @text.literal
 @text.uri
+@text.math (e.g. for LaTeX math environments)
+@text.environment (e.g. for text environments of markup languages)
+@text.environment.name (e.g. for the name/the string indicating the type of text environment)
+@text.reference (for footnotes, text references, citations)
+
+@text.note
+@text.warning
+@text.danger
 ```
 
 #### Tags
@@ -248,6 +259,16 @@ the node describing the language and `@content` to describe the injection region
 ```
 @{language} ; e.g. @html to describe a html region
 
-@language ; dynamic detection of the injection language (i.e. the text of the captured node describes the language)
-@content ; region for the dynamically detected language
+@language ; dynamic detection of the injection language (i.e. the text of the captured node describes the language).
+@content ; region for the dynamically detected language.
+@combined ; This will combine all matches of a pattern as one single block of content.
+```
+
+### Indents
+
+```
+@indent ; Indent when matching this node
+@branch ; Dedent when matching this node
+@return ; Dedent when matching this node
+@ignore ; Skip this node when calculating the indentation level
 ```

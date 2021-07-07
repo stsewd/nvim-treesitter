@@ -8,8 +8,8 @@
 (integer_scalar) @number
 (float_scalar) @number
 (comment) @comment
-(anchor) @type
-(alias) @type
+(anchor_name) @type
+(alias_name) @type
 (tag) @type
 (yaml_directive) @keyword
 (ERROR) @error
@@ -20,7 +20,6 @@
 (block_mapping_pair
   key: (flow_node (plain_scalar (string_scalar) @field)))
 
-(flow_mapping key: (_) @field)
 (flow_mapping
   (_ key: (flow_node [(double_quote_scalar) (single_quote_scalar)] @field)))
 (flow_mapping
@@ -43,6 +42,8 @@
 ] @punctuation.bracket
 
 [
+ "*"
+ "&"
  "---"
  "..."
 ] @punctuation.special

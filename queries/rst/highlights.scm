@@ -12,6 +12,10 @@
   (transition)
 ] @punctuation.special
 
+;; Resets for injection
+
+(doctest_block) @none
+
 ;; Directives
 
 (directive
@@ -123,7 +127,7 @@
   (footnote_reference)
   (citation_reference)
   (reference)
-] @constant
+] @text.reference
 
 ;; Others
 

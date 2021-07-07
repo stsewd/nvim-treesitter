@@ -28,7 +28,12 @@
 (foreach_statement
   (pair
     (variable_name
-      (name) @definition.var))
+      (name) @definition.var)))
+
+(foreach_statement
+  (variable_name
+    (name) @reference
+      (set! reference.kind "var"))
   (variable_name
     (name) @definition.var))
 
@@ -44,8 +49,12 @@
 ; References
 ;------------
 
-(type_name
+(named_type
   (name) @reference
+    (set! reference.kind "type"))
+
+(named_type
+  (qualified_name) @reference
     (set! reference.kind "type"))
 
 (variable_name

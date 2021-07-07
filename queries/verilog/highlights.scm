@@ -3,7 +3,6 @@
 [
   "module"
   "endmodule"
-  "function"
   "endfunction"
   "task"
   "endtask"
@@ -13,7 +12,6 @@
   "typedef"
   "class"
   "endclass"
-  "return"
   "default"
   "break"
   "interface"
@@ -27,6 +25,9 @@
   "join_any"
   "assert"
 ] @keyword
+
+"function" @keyword.function
+"return" @keyword.return
 
 [
   "begin"
@@ -229,9 +230,10 @@
  (task_identifier
   (simple_identifier) @method))
 
-(assignment_pattern_expression
- (assignment_pattern
-  (parameter_identifier) @field))
+;;TODO: fixme
+;(assignment_pattern_expression
+ ;(assignment_pattern
+  ;(parameter_identifier) @field))
 
 (type_declaration
   (data_type ["packed"] @label))

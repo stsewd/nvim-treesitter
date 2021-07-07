@@ -4,6 +4,9 @@
   (preproc_arg)
   (field_declaration_list)
   (case_statement)
+  (conditional_expression)
+  (enumerator_list)
+  (struct_specifier)
 ] @indent
 
 
@@ -14,3 +17,8 @@
   "{"
   "}"
 ] @branch
+
+[
+  (comment)
+  (preproc_function_def)
+] @ignore

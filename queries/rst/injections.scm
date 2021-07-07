@@ -40,10 +40,11 @@
    body: (body (content) @latex))
  (#eq? @_type "math"))
 
-((directive
-   name: (type) @_type
-   body: (body (content) @csv))
- (#eq? @_type "csv-table"))
+; TODO: re-add when a parser for csv is added.
+; ((directive
+;    name: (type) @_type
+;    body: (body (content) @csv))
+;  (#eq? @_type "csv-table"))
 
 ;; Special roles - prefix
 
@@ -58,3 +59,5 @@
   "interpreted_text" @latex
   (role) @_role)
  (#eq? @_role ":math:"))
+
+(comment) @comment

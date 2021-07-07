@@ -1,63 +1,33 @@
-; inherits: (jsx)
-
-; Scopes
-;-------
-
-(statement_block) @scope
-(function) @scope
-(arrow_function) @scope
-(function_declaration) @scope
-(method_definition) @scope
-(for_statement) @scope
-(for_in_statement) @scope
-(catch_clause) @scope
-
-; Definitions
-;------------
+; inherits: ecma,jsx
 
 (formal_parameters
   (identifier) @definition.parameter)
 
-(formal_parameters
-  (object_pattern
-    (identifier) @definition.parameter))
-
 ; function(arg = []) {
 (formal_parameters
   (assignment_pattern
-    (shorthand_property_identifier) @definition.parameter))
+    left: (identifier) @definition.parameter))
 
 ; x => x
 (arrow_function
   parameter: (identifier) @definition.parameter)
 
+;; ({ a }) => null
 (formal_parameters
   (object_pattern
-    (shorthand_property_identifier) @definition.parameter))
+    (shorthand_property_identifier_pattern) @definition.parameter))
 
+;; ({ a: b }) => null
+(formal_parameters
+  (object_pattern
+    (pair_pattern
+      value: (identifier) @definition.parameter)))
+
+;; ([ a ]) => null
 (formal_parameters
   (array_pattern
     (identifier) @definition.parameter))
 
 (formal_parameters
-  (rest_parameter
+  (rest_pattern
     (identifier) @definition.parameter))
-
-(variable_declarator
-  name: (identifier) @definition.var)
-
-(import_specifier
-  (identifier) @definition.import)
-
-(namespace_import
-  (identifier) @definition.import)
-
-(function_declaration
-  ((identifier) @definition.var)
-   (#set! definition.var.scope parent))
-
-; References
-;------------
-
-(identifier) @reference
-(shorthand_property_identifier) @reference

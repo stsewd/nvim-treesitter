@@ -19,10 +19,13 @@
  "next"
  "rescue"
  "retry"
- "return"
  "then"
- "yield"
  ] @keyword
+
+[
+ "return"
+ "yield"
+] @keyword.return
 
 [
  "and"
@@ -45,7 +48,7 @@
  "while"
  ] @repeat
 
-(constant) @constant
+(constant) @type
 
 ((identifier) @keyword
  (#vim-match? @keyword "^(private|protected|public)$"))
@@ -82,12 +85,12 @@
 
 (method name: [
                (identifier) @function
-               (constant) @constant
+               (constant) @type
                ])
 
 (singleton_method name: [
                          (identifier) @function
-                         (constant) @constant
+                         (constant) @type
                          ])
 
 (class name: (constant) @type)
@@ -103,8 +106,8 @@
 ((identifier) @constant.builtin
  (#vim-match? @constant.builtin "^__(callee|dir|id|method|send|ENCODING|FILE|LINE)__$"))
 
-((constant) @constant.macro
- (#vim-match? @constant.macro "^[A-Z\\d_]+$"))
+((constant) @type
+ (#vim-match? @type "^[A-Z\\d_]+$"))
 
 [
  (self)
@@ -144,7 +147,7 @@
  (simple_symbol)
  (delimited_symbol)
  (hash_key_symbol)
- ] @property
+ ] @symbol
 
 (pair key: (hash_key_symbol) ":" @constant)
 (regex) @string.regex

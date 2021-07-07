@@ -1,16 +1,7 @@
-[
-  (enumerator_list)
-  (struct_specifier)
-  (compound_statement)
-  (case_statement)
-  (condition_clause)
-  (conditional_expression)
-] @indent
+; inherits: c
 
 [
-  (statement_identifier)
-  "#ifdef"
-  "#endif"
-  "{"
-  "}"
-] @branch
+  (field_declaration_list)
+  (class_specifier)
+  (condition_clause)
+] @indent

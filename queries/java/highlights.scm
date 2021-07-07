@@ -19,6 +19,9 @@
 (catch_formal_parameter
   name: (identifier) @parameter)
 
+(spread_parameter
+ (variable_declarator) @parameter) ; int... foo
+
 ;; Lambda parameter
 (inferred_parameters (identifier) @parameter) ; (x,y) -> ...
 (lambda_expression
@@ -80,6 +83,8 @@
   name: (identifier) @type)
 (class_declaration
   name: (identifier) @type)
+(record_declaration
+  name: (identifier) @type)
 (enum_declaration
   name: (identifier) @type)
 (constructor_declaration
@@ -95,6 +100,14 @@
   scope: (identifier) @type)
   (#match? @type "^[A-Z]"))
 
+; Fields
+
+(field_declaration
+  declarator: (variable_declarator) @field)
+
+(field_access
+  field: (identifier) @field)
+
 [
 (boolean_type)
 (integral_type)
@@ -105,7 +118,7 @@
 ; Variables
 
 ((identifier) @constant
-  (#vim-match? @constant "^_*[A-Z][A-Z\d_]+"))
+  (#match? @constant "^[A-Z_][A-Z\d_]+$"))
 
 (this) @variable.builtin
 
@@ -141,6 +154,7 @@
 "assert"
 "break"
 "class"
+"record"
 "continue"
 "default"
 "enum"
@@ -160,7 +174,6 @@
 "provides"
 "public"
 "requires"
-"return"
 "static"
 "strictfp"
 "synchronized"
@@ -171,6 +184,11 @@
 "volatile"
 "with"
 ] @keyword
+
+[
+"return"
+"yield"
+] @keyword.return
 
 [
  "new"
@@ -205,6 +223,7 @@
 [
 ";"
 "."
+"..."
 ","
 ] @punctuation.delimiter
 
